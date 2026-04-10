@@ -1,0 +1,41 @@
+
+@import "tailwindcss";
+
+:root {
+  --font-serif: 'DM Serif Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #1a0a2e; /* your dark purple base */
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;        /* fixed so it covers the whole page */
+  inset: -50%;            /* extend beyond edges to fill gaps after rotation */
+  background-image: url('/bg.png');
+  background-repeat: repeat;
+  background-size: 200px 200px;   /* control how big each tile is */
+  transform: rotate(-30deg);      /* diagonal angle like in your screenshot */
+  opacity: 0.08;                  /* very subtle, like yours */
+  z-index: 0;
+  pointer-events: none;           /* clicks pass through */
+}
+
+/* make sure all content sits above the watermark */
+body > * {
+  position: relative;
+  z-index: 1;
+}
