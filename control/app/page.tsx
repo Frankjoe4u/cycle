@@ -1,81 +1,125 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import InputCard from "@/components/InputCard";
-import ResultsSection from "@/components/ResultsSection";
-import HistorySection from "@/components/HistorySection";
-import { CycleResult } from "@/components/cycleUtils";
-import {
-  saveToHistory,
-  getHistory,
-  HistoryEntry,
-} from "@/components/historyUtils";
+import { useState } from "react";
+import { CycleResult, calculateCycle } from "@/components/cycleUtils";
 
-export default function Home() {
-  const [result, setResult] = useState<CycleResult | null>(null);
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [activeTab, setActiveTab] = useState<"tracker" | "history">("tracker");
-
-  useEffect(() => {
-    setHistory(getHistory());
-  }, []);
-
-  function handleCalculate(
+interface Props {
+  onCalculate: (
     res: CycleResult,
     lastPeriod: string,
     cycleLength: number,
     periodDur: number,
-  ) {
-    setResult(res);
-    saveToHistory(lastPeriod, cycleLength, periodDur, res);
-    setHistory(getHistory());
-  }
+  ) => void;
+}
 
-  function refreshHistory() {
-    setHistory(getHistory());
+export default function InputCard({ onCalculate }: Props) {
+  const [lastPeriod, setLastPeriod] = useState("");
+  const [cycleLength, setCycleLength] = useState(28);
+  const [periodDur, setPeriodDur] = useState(5);
+
+  function handleCalculate() {
+    if (!lastPeriod) {
+      alert("Please select the first day of your last period.");
+      return;
+    }
+    const result = calculateCycle(lastPeriod, cycleLength, periodDur);
+    onCalculate(result, lastPeriod, cycleLength, periodDur);
   }
 
   return (
-    <main className="max-w-xl mx-auto px-4 pb-16">
-      <Navbar />
+    <section
+      className="rounded-2xl p-6 mb-6"
+      style={{ backgroundColor: "rgba(20, 10, 40, 0.85)" }}
+    >
+      <h2
+        className="text-2xl font-bold mb-6 text-[#f472b6]"
+        style={{ fontFamily: "var(--font-serif)" }}
+      >
+        Tell me about your cycle
+      </h2>
 
-      {/* Tab Switch */}
-      <div className="flex gap-3 mb-6">
-        <button
-          onClick={() => setActiveTab("tracker")}
-          className={
-            "flex-1 py-3 rounded-xl font-semibold text-sm transition " +
-            (activeTab === "tracker"
-              ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
-              : "bg-white/5 border border-white/10 text-[#c084fc] hover:bg-white/10")
-          }
-        >
-          🩸 Tracker
-        </button>
-        <button
-          onClick={() => setActiveTab("history")}
-          className={
-            "flex-1 py-3 rounded-xl font-semibold text-sm transition " +
-            (activeTab === "history"
-              ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
-              : "bg-white/5 border border-white/10 text-[#c084fc] hover:bg-white/10")
-          }
-        >
-          📋 History {history.length > 0 && "(" + history.length + ")"}
-        </button>
+      <div className="mb-6">
+        <label className="block text-xs font-semibold tracking-widest text-[#c084fc] mb-2 uppercase">
+          First Day of Last Period
+        </label>
+        <input
+          type="date"
+          value={lastPeriod}
+          onChange={(e) => setLastPeriod(e.target.value)}
+          className="w-full rounded-xl px-4 py-3 text-[#f0e6ff] outline-none focus:border-[#c084fc] transition"
+          style={{ backgroundColor: "rgba(255,255,255,0.07)", border: "none" }}
+        />
       </div>
 
-      {activeTab === "tracker" && (
-        <>
-          <InputCard onCalculate={handleCalculate} />
-          {result && <ResultsSection result={result} />}
-        </>
-      )}
+      <div className="mb-6">
+        <label className="block text-xs font-semibold tracking-widest text-[#c084fc] mb-2 uppercase">
+          Average Cycle Length
+        </label>
+        <div
+          className="flex items-center justify-between rounded-xl px-4 py-3"
+          style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
+        >
+          <button
+            onClick={() => setCycleLength((v) => Math.max(21, v - 1))}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-xl text-[#f0e6ff] hover:bg-[#c084fc]/30 transition"
+            style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+          >
+            −
+          </button>
+          <div className="flex items-center gap-2">
+            <span className="text-3xl font-bold text-[#a78bfa]">
+              {cycleLength}
+            </span>
+            <span className="text-sm text-[#c084fc]">days</span>
+          </div>
+          <button
+            onClick={() => setCycleLength((v) => Math.min(40, v + 1))}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-xl text-[#f0e6ff] hover:bg-[#c084fc]/30 transition"
+            style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+          >
+            +
+          </button>
+        </div>
+      </div>
 
-      {activeTab === "history" && (
-        <HistorySection history={history} onUpdate={refreshHistory} />
-      )}
-    </main>
+      <div className="mb-8">
+        <label className="block text-xs font-semibold tracking-widest text-[#c084fc] mb-2 uppercase">
+          Period Duration
+        </label>
+        <div
+          className="flex items-center justify-between rounded-xl px-4 py-3"
+          style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
+        >
+          <button
+            onClick={() => setPeriodDur((v) => Math.max(2, v - 1))}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-xl text-[#f0e6ff] hover:bg-[#c084fc]/30 transition"
+            style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+          >
+            −
+          </button>
+          <div className="flex items-center gap-2">
+            <span className="text-3xl font-bold text-[#a78bfa]">
+              {periodDur}
+            </span>
+            <span className="text-sm text-[#c084fc]">days</span>
+          </div>
+          <button
+            onClick={() => setPeriodDur((v) => Math.min(10, v + 1))}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-xl text-[#f0e6ff] hover:bg-[#c084fc]/30 transition"
+            style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      <button
+        onClick={handleCalculate}
+        className="w-full py-4 rounded-xl text-white font-semibold text-lg hover:opacity-90 transition"
+        style={{ background: "linear-gradient(to right, #ec4899, #8b5cf6)" }}
+      >
+        Calculate my cycle →
+      </button>
+    </section>
   );
 }
