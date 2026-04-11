@@ -7,7 +7,7 @@
   "background_color": "#0d0d1a",
   "theme_color": "#c084fc",
   "orientation": "portrait",
-  "icons": [
+  "logo": [
     {
       "src": "/logo.png",
       "sizes": "192x192",
