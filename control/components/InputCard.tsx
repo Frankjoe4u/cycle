@@ -52,7 +52,7 @@ export default function InputCard({ onCalculate }: Props) {
       {/* Date Input */}
       <div style={{ marginBottom: "40px" }}>
         <label
-          className="block text-xs font-semibold tracking-widest text-[#c084fc] uppercase"
+          className="block text-xs  font-semibold tracking-widest text-[#c084fc] uppercase"
           style={{ marginBottom: "12px" }}
         >
           First Day of Last Period
@@ -61,7 +61,7 @@ export default function InputCard({ onCalculate }: Props) {
           type="date"
           value={lastPeriod}
           onChange={(e) => setLastPeriod(e.target.value)}
-          className="w-full rounded-xl px-4 py-3 text-[#f0e6ff] outline-none transition"
+          className="w-full h-13 rounded-xl px-4 py-3 text-[#f0e6ff] outline-none transition"
           style={{ backgroundColor: "rgba(255,255,255,0.07)", border: "none" }}
         />
       </div>
@@ -69,13 +69,13 @@ export default function InputCard({ onCalculate }: Props) {
       {/* Cycle Length */}
       <div style={{ marginBottom: "40px" }}>
         <label
-          className="block text-xs font-semibold tracking-widest text-[#c084fc] uppercase"
+          className=" block text-xs font-semibold tracking-widest text-[#c084fc] uppercase"
           style={{ marginBottom: "12px" }}
         >
           Average Cycle Length
         </label>
         <div
-          className="flex items-center justify-between rounded-xl px-4 py-3"
+          className="flex h-13 items-center justify-between rounded-xl px-4 py-3"
           style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
         >
           <button
@@ -110,7 +110,7 @@ export default function InputCard({ onCalculate }: Props) {
           Period Duration
         </label>
         <div
-          className="flex items-center justify-between rounded-xl px-4 py-3"
+          className="flex h-13 items-center justify-between rounded-xl px-4 py-3"
           style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
         >
           <button

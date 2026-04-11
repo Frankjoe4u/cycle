@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import InputCard from "@/components/InputCard";
 import ResultsSection from "@/components/ResultsSection";
@@ -16,6 +16,7 @@ export default function Home() {
   const [result, setResult] = useState<CycleResult | null>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [activeTab, setActiveTab] = useState<"tracker" | "history">("tracker");
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setHistory(getHistory());
@@ -30,6 +31,16 @@ export default function Home() {
     setResult(res);
     saveToHistory(lastPeriod, cycleLength, periodDur, res);
     setHistory(getHistory());
+
+    // slowly scroll so input goes halfway up and results peek in
+    setTimeout(() => {
+      if (resultsRef.current) {
+        resultsRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 200);
   }
 
   function refreshHistory() {
@@ -38,13 +49,14 @@ export default function Home() {
 
   return (
     <main className="w-full max-w-xl mx-auto px-4 pb-16">
+      
       <Navbar />
 
       <div className="flex gap-3 mb-6">
         <button
           onClick={() => setActiveTab("tracker")}
           className={
-            "flex-1 h-16 py-4 rounded-xl font-bold text-base transition " +
+            "flex-1 h-16 rounded-xl font-bold text-base transition " +
             (activeTab === "tracker"
               ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
               : "bg-white/5 border-2 border-white/20 text-[#c084fc] hover:bg-white/10")
@@ -55,7 +67,7 @@ export default function Home() {
         <button
           onClick={() => setActiveTab("history")}
           className={
-            "flex-1 py-4 rounded-xl font-bold text-base transition " +
+            "flex-1 h-16 rounded-xl font-bold text-base transition " +
             (activeTab === "history"
               ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
               : "bg-white/5 border-2 border-white/20 text-[#c084fc] hover:bg-white/10")
@@ -69,7 +81,12 @@ export default function Home() {
       {activeTab === "tracker" && (
         <>
           <InputCard onCalculate={handleCalculate} />
-          {result && <ResultsSection result={result} />}
+
+          {result && (
+            <div ref={resultsRef} className="mt-6 animate-fadeSlideUp">
+              <ResultsSection result={result} />
+            </div>
+          )}
         </>
       )}
 
