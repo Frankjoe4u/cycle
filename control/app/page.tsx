@@ -37,17 +37,17 @@ export default function Home() {
   }
 
   return (
-    <main className="max-w-xl mx-auto px-4 pb-16">
+    <main className="w-full max-w-xl mx-auto px-4 pb-16">
       <Navbar />
 
       <div className="flex gap-3 mb-6">
         <button
           onClick={() => setActiveTab("tracker")}
           className={
-            "flex-1 py-3 rounded-xl font-semibold text-sm transition " +
+            "flex-1 h-16 py-4 rounded-xl font-bold text-base transition " +
             (activeTab === "tracker"
               ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
-              : "bg-white/5 border border-white/10 text-[#c084fc] hover:bg-white/10")
+              : "bg-white/5 border-2 border-white/20 text-[#c084fc] hover:bg-white/10")
           }
         >
           🩸 Tracker
@@ -55,10 +55,10 @@ export default function Home() {
         <button
           onClick={() => setActiveTab("history")}
           className={
-            "flex-1 py-3 rounded-xl font-semibold text-sm transition " +
+            "flex-1 py-4 rounded-xl font-bold text-base transition " +
             (activeTab === "history"
               ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
-              : "bg-white/5 border border-white/10 text-[#c084fc] hover:bg-white/10")
+              : "bg-white/5 border-2 border-white/20 text-[#c084fc] hover:bg-white/10")
           }
         >
           {"📋 History" +

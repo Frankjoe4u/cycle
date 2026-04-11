@@ -25,7 +25,7 @@ export default function SplashScreen({ onDone }: Props) {
         (fadeOut ? "opacity-0" : "opacity-100")
       }
     >
-      {/* Glow behind logo */}
+      {/* Glow */}
       <div className="absolute w-64 h-64 rounded-full bg-[#c084fc]/20 blur-3xl" />
 
       {/* Logo */}
@@ -36,13 +36,13 @@ export default function SplashScreen({ onDone }: Props) {
         }
       >
         <img
-          src="/logo.png"
-          alt="EveCare"
+          src="/pro.jpg"
+          alt="FJ Tracker"
           className="w-full h-full object-cover"
         />
       </div>
 
-      {/* App Name */}
+      {/* Title */}
       <h1
         className={
           "mt-6 text-2xl font-bold tracking-widest uppercase text-[#f0e6ff] transition-all duration-700 delay-200 " +
@@ -53,6 +53,7 @@ export default function SplashScreen({ onDone }: Props) {
         FJ Tracker
       </h1>
 
+      {/* Tagline */}
       <p
         className={
           "mt-2 text-sm text-[#c084fc] tracking-wide transition-all duration-700 delay-300 " +
@@ -62,7 +63,7 @@ export default function SplashScreen({ onDone }: Props) {
         Your gentle cycle companion
       </p>
 
-      {/* Pulse dot */}
+      {/* Bouncing dots */}
       <div className="mt-10 flex gap-2">
         <div
           className="w-2 h-2 rounded-full bg-[#c084fc] animate-bounce"

@@ -27,7 +27,7 @@ export default function ResultsSection({ result }: Props) {
         ovulationDay={ovulationDay}
       />
 
-      <div className="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
+      <div className="bg-white/5 h-29 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
         <h3 className="text-lg font-bold text-[#f0e6ff] mb-1">🛡️ Safe Days</h3>
         <p className="text-xs text-[#c084fc] mb-4">
           Lower likelihood of conception
@@ -39,7 +39,7 @@ export default function ResultsSection({ result }: Props) {
         <h3 className="text-lg font-bold text-[#f0e6ff] mb-1">
           🌸 Fertile Window
         </h3>
-        <p className="text-xs text-[#c084fc] mb-4">
+        <p className="text-xs h-7 text-[#c084fc] mb-4">
           Higher likelihood of conception
         </p>
         <DateBands windows={fertileWindows} type="fertile" />
@@ -51,7 +51,7 @@ export default function ResultsSection({ result }: Props) {
         <h3 className="text-lg font-bold text-[#f0e6ff] mb-1">
           📅 Period Days
         </h3>
-        <p className="text-xs text-[#c084fc] mb-4">
+        <p className="text-xs h-7 text-[#c084fc] mb-4">
           Expected menstruation window
         </p>
         <DateBands windows={[[nextPeriodStart, nextPeriodEnd]]} type="period" />
