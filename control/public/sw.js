@@ -1,5 +1,5 @@
 const CACHE_NAME = "evecircles-v2";
-const URLS_TO_CACHE = ["/", "/manifest.json", "/logo.png"];
+const URLS_TO_CACHE = ["/", "/manifest.json", "/icon-192.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

@@ -24,7 +24,7 @@ export default function RootLayout({
           content="black-translucent"
         />
         <meta name="apple-mobile-web-app-title" content="Eve-Circle" />
-        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className="bg-[#0d0d1a] text-[#f0e6ff] min-h-screen">
         <ServiceWorkerRegister />

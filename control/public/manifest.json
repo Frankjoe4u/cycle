@@ -1,24 +1,24 @@
 {
-  "name": "eve-cycle",
-  "short_name": "EVE",
+  "name": "Eve-Circle",
+  "short_name": "Eve-Circle",
   "description": "Your gentle cycle companion",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0d0d1a",
   "theme_color": "#c084fc",
   "orientation": "portrait",
-  "logo": [
+  "icons": [
     {
-      "src": "/logo.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "/logo.png",
+      "src": "/icon-192.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }

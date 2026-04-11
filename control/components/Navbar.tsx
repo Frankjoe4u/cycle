@@ -9,7 +9,7 @@ export default function Navbar() {
         style={{ marginBottom: "32px" }}
       >
         <img
-          src="/logo.png"
+          src="/icon-192.png"
           alt="eve-care"
           className="w-full h-full object-cover"
         />
