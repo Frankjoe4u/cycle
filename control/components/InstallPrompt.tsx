@@ -68,15 +68,15 @@ export default function InstallPrompt() {
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-[#c084fc] flex-shrink-0">
             <img
-              src="/pro.jpg"
-              alt="FJ Tracker"
+              src="/logo.png"
+              alt="Eve-Circle"
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex-1">
-            <div className="font-bold text-[#f0e6ff]">Install FJ Tracker</div>
+          <div className="flex-1 bg-purple-500">
+            <div className="font-bold text-[#f0e6ff]">Install  Eve-Circle</div>
             <div className="text-xs text-[#c084fc] mt-1">
-              Add to home screen for quick access
+              Install to Homescreen
             </div>
           </div>
           <button
