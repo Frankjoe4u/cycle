@@ -3,7 +3,7 @@ import "./globals.css";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 export const metadata: Metadata = {
-  title: "FJ Tracker",
+  title: "Eve-circle",
   description: "Your gentle cycle companion",
 };
 
@@ -23,8 +23,8 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
-        <meta name="apple-mobile-web-app-title" content="FJ Tracker" />
-        <link rel="apple-touch-icon" href="/pro.jpg" />
+        <meta name="apple-mobile-web-app-title" content="Eve-Circle" />
+        <link rel="apple-touch-icon" href="/logo.png" />
       </head>
       <body className="bg-[#0d0d1a] text-[#f0e6ff] min-h-screen">
         <ServiceWorkerRegister />

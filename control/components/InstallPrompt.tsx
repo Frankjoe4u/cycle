@@ -73,7 +73,7 @@ export default function InstallPrompt() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex-1 bg-purple-500">
+          <div className="flex-1">
             <div className="font-bold text-[#f0e6ff]">Install  Eve-Circle</div>
             <div className="text-xs text-[#c084fc] mt-1">
               Install to Homescreen
