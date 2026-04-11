@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import InstallPrompt from "@/components/InstallPrompt";
 import Navbar from "@/components/Navbar";
 import InputCard from "@/components/InputCard";
 import ResultsSection from "@/components/ResultsSection";
@@ -49,7 +50,7 @@ export default function Home() {
 
   return (
     <main className="w-full max-w-xl mx-auto px-4 pb-16">
-      
+      <InstallPrompt />
       <Navbar />
 
       <div className="flex gap-3 mb-6">
