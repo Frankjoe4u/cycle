@@ -4,7 +4,12 @@ import { useState } from "react";
 import { CycleResult, calculateCycle } from "@/components/cycleUtils";
 
 interface Props {
-  onCalculate: (result: CycleResult) => void;
+  onCalculate: (
+    result: CycleResult,
+    lastPeriod: string,
+    cycleLength: number,
+    periodDur: number,
+  ) => void;
 }
 
 export default function InputCard({ onCalculate }: Props) {
@@ -18,7 +23,7 @@ export default function InputCard({ onCalculate }: Props) {
       return;
     }
     const result = calculateCycle(lastPeriod, cycleLength, periodDur);
-    onCalculate(result);
+    onCalculate(result, lastPeriod, cycleLength, periodDur);
   }
 
   return (
@@ -26,7 +31,6 @@ export default function InputCard({ onCalculate }: Props) {
       className="rounded-2xl p-6 mb-6"
       style={{ backgroundColor: "rgba(20, 10, 40, 0.85)" }}
     >
-      {/* Title */}
       <h2
         className="text-2xl font-bold mb-6 text-[#f472b6]"
         style={{ fontFamily: "var(--font-serif)" }}
@@ -34,7 +38,6 @@ export default function InputCard({ onCalculate }: Props) {
         Tell me about your cycle
       </h2>
 
-      {/* Date Input */}
       <div className="mb-6">
         <label className="block text-xs font-semibold tracking-widest text-[#c084fc] mb-2 uppercase">
           First Day of Last Period
@@ -48,7 +51,6 @@ export default function InputCard({ onCalculate }: Props) {
         />
       </div>
 
-      {/* Cycle Length Stepper */}
       <div className="mb-6">
         <label className="block text-xs font-semibold tracking-widest text-[#c084fc] mb-2 uppercase">
           Average Cycle Length
@@ -80,7 +82,6 @@ export default function InputCard({ onCalculate }: Props) {
         </div>
       </div>
 
-      {/* Period Duration Stepper */}
       <div className="mb-8">
         <label className="block text-xs font-semibold tracking-widest text-[#c084fc] mb-2 uppercase">
           Period Duration
@@ -112,7 +113,6 @@ export default function InputCard({ onCalculate }: Props) {
         </div>
       </div>
 
-      {/* Calculate Button */}
       <button
         onClick={handleCalculate}
         className="w-full py-4 rounded-xl text-white font-semibold text-lg hover:opacity-90 transition"
