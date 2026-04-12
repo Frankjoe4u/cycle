@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 export const metadata: Metadata = {
-  title: "Eve-circle",
+  title: "Eve-Circle",
   description: "Your gentle cycle companion",
 };
 
@@ -28,6 +29,7 @@ export default function RootLayout({
       </head>
       <body className="bg-[#0d0d1a] text-[#f0e6ff] min-h-screen">
         <ServiceWorkerRegister />
+        <Analytics />
         {children}
       </body>
     </html>
