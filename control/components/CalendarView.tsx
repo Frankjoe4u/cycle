@@ -49,38 +49,26 @@ function CalendarMonth({
       <div className="text-center font-bold text-[#c084fc] mb-3 text-sm tracking-wide uppercase">
         {monthName}
       </div>
-
       <div className="grid grid-cols-7 gap-1">
-        {/* Day headers */}
         {DAY_NAMES.map((d) => (
-          <div
-            key={d}
-            className="text-center text-xs text-[#c084fc]/60 font-medium py-1"
-          >
+          <div key={d} className="text-center text-xs text-[#c084fc]/60 font-medium py-1">
             {d}
           </div>
         ))}
-
-        {/* Empty cells */}
         {Array.from({ length: firstDow }).map((_, i) => (
           <div key={"e" + i} />
         ))}
-
-        {/* Days */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const day = i + 1;
           const date = new Date(year, month, day);
           const isToday = isSameDay(date, today);
-
           return (
             <div
               key={day}
               className={
                 "flex items-center justify-center rounded-full w-8 h-8 mx-auto text-xs transition " +
                 getDayClass(date) +
-                (isToday
-                  ? " ring-2 ring-[#c084fc] ring-offset-1 ring-offset-[#0d0d1a]"
-                  : "")
+                (isToday ? " ring-2 ring-[#c084fc] ring-offset-1 ring-offset-[#0d0d1a]" : "")
               }
             >
               {day}
@@ -92,29 +80,19 @@ function CalendarMonth({
   );
 }
 
-export default function CalendarView({
-  lastPeriod,
-  periodDates,
-  fertileDates,
-  safeDates,
-}: Props) {
+export default function CalendarView({ lastPeriod, periodDates, fertileDates, safeDates }: Props) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const months = [0, 1].map((offset) => {
-    const d = new Date(
-      lastPeriod.getFullYear(),
-      lastPeriod.getMonth() + offset,
-      1,
-    );
+  // show 3 months to cover fertile + period window
+  const months = [0, 1, 2].map((offset) => {
+    const d = new Date(lastPeriod.getFullYear(), lastPeriod.getMonth() + offset, 1);
     return { year: d.getFullYear(), month: d.getMonth() };
   });
 
   return (
     <div className="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
       <h3 className="text-lg font-bold text-[#f0e6ff] mb-4">📅 Monthly View</h3>
-
-      {/* Legend */}
       <div className="flex gap-4 mb-5 text-xs">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-red-500/60" />
@@ -133,8 +111,6 @@ export default function CalendarView({
           <span className="text-[#f0e6ff]/70">Today</span>
         </div>
       </div>
-
-      {/* Months */}
       {months.map(({ year, month }) => (
         <CalendarMonth
           key={year + "-" + month}
