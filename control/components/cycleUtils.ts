@@ -1,5 +1,3 @@
-// ─── Helpers ────────────────────────────────────────────────────────────────
-
 export function addDays(date: Date, n: number): Date {
   const d = new Date(date);
   d.setDate(d.getDate() + n);
@@ -47,8 +45,6 @@ export function dayDiff(a: Date, b: Date): number {
   return Math.round((b.getTime() - a.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 }
 
-// ─── Group contiguous dates into [start, end] pairs ─────────────────────────
-
 export function groupContiguous(dates: Date[]): [Date, Date][] {
   if (!dates.length) return [];
   const sorted = [...dates].sort((a, b) => a.getTime() - b.getTime());
@@ -70,9 +66,8 @@ export function groupContiguous(dates: Date[]): [Date, Date][] {
   return groups;
 }
 
-// ─── Main Calculate Function ─────────────────────────────────────────────────
-
 export interface CycleResult {
+  lastPeriod: Date;
   nextPeriodStart: Date;
   nextPeriodEnd: Date;
   ovulationDay: Date;
@@ -96,15 +91,22 @@ export function calculateCycle(
 ): CycleResult {
   const lastPeriod = new Date(lastPeriodInput);
 
+  // ── Current period (what user entered)
+  const currentPeriodEnd = addDays(lastPeriod, periodDur - 1);
+  const currentPeriodDates = dateRange(lastPeriod, currentPeriodEnd);
+
   // ── Next period
   const nextPeriodStart = addDays(lastPeriod, cycleLength);
   const nextPeriodEnd = addDays(nextPeriodStart, periodDur - 1);
-  const periodDates = dateRange(nextPeriodStart, nextPeriodEnd);
+  const nextPeriodDates = dateRange(nextPeriodStart, nextPeriodEnd);
+
+  // ── Combine both periods
+  const periodDates = [...currentPeriodDates, ...nextPeriodDates];
 
   // ── Ovulation (14 days before next period)
   const ovulationDay = addDays(nextPeriodStart, -14);
 
-  // ── Fertile window (5 days before ovulation + ovulation + 1 day after)
+  // ── Fertile window
   const fertileStart = addDays(ovulationDay, -5);
   const fertileEnd = addDays(ovulationDay, 1);
   const fertileDates = dateRange(fertileStart, fertileEnd);
@@ -115,11 +117,9 @@ export function calculateCycle(
   const allCycleDays = dateRange(cycleStart, cycleEnd);
   const safeDates = allCycleDays.filter((d) => !dateInSet(d, fertileDates));
 
-  // ── Windows
   const safeWindows = groupContiguous(safeDates);
   const fertileWindows = groupContiguous(fertileDates);
 
-  // ── Gender likelihood (Shettles Method)
   const boyOptimalStart = addDays(ovulationDay, -1);
   const boyOptimalEnd = new Date(ovulationDay);
   const girlOptimalStart = addDays(ovulationDay, -5);
@@ -143,6 +143,7 @@ export function calculateCycle(
   const girlPct = Math.round((girlScore / total) * 100);
 
   return {
+    lastPeriod,
     nextPeriodStart,
     nextPeriodEnd,
     ovulationDay,
