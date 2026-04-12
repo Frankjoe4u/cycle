@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import InstallPrompt from "@/components/InstallPrompt";
 import Navbar from "@/components/Navbar";
 import InputCard from "@/components/InputCard";
 import ResultsSection from "@/components/ResultsSection";
 import HistorySection from "@/components/HistorySection";
+import InstallPrompt from "@/components/InstallPrompt";
 import { CycleResult } from "@/components/cycleUtils";
 import {
   saveToHistory,
@@ -23,7 +23,7 @@ export default function Home() {
     setHistory(getHistory());
   }, []);
 
-  function handleCalculate(
+  async function handleCalculate(
     res: CycleResult,
     lastPeriod: string,
     cycleLength: number,
@@ -33,7 +33,26 @@ export default function Home() {
     saveToHistory(lastPeriod, cycleLength, periodDur, res);
     setHistory(getHistory());
 
-    // slowly scroll so input goes halfway up and results peek in
+    // save to MongoDB
+    try {
+      await fetch("/api/cycle", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lastPeriod,
+          cycleLength,
+          periodDur,
+          nextPeriodStart: res.nextPeriodStart.toISOString(),
+          ovulationDay: res.ovulationDay.toISOString(),
+          boyPct: res.boyPct,
+          girlPct: res.girlPct,
+        }),
+      });
+    } catch (err) {
+      console.error("Failed to save to MongoDB:", err);
+    }
+
+    // scroll to results
     setTimeout(() => {
       if (resultsRef.current) {
         resultsRef.current.scrollIntoView({
@@ -82,7 +101,6 @@ export default function Home() {
       {activeTab === "tracker" && (
         <>
           <InputCard onCalculate={handleCalculate} />
-
           {result && (
             <div ref={resultsRef} className="mt-6 animate-fadeSlideUp">
               <ResultsSection result={result} />
