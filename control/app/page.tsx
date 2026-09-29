@@ -78,7 +78,7 @@ export default function Home() {
           className={
             "flex-1 h-16 rounded-xl font-bold text-base transition " +
             (activeTab === "tracker"
-              ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
+              ? "bg-linear-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
               : "bg-white/5 border-2 border-white/20 text-[#c084fc] hover:bg-white/10")
           }
         >
@@ -89,7 +89,7 @@ export default function Home() {
           className={
             "flex-1 h-16 rounded-xl font-bold text-base transition " +
             (activeTab === "history"
-              ? "bg-gradient-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
+              ? "bg-linear-to-r from-[#c084fc] to-[#818cf8] text-white shadow-lg shadow-purple-900/40"
               : "bg-white/5 border-2 border-white/20 text-[#c084fc] hover:bg-white/10")
           }
         >

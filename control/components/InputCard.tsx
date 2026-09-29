@@ -105,7 +105,7 @@ export default function InputCard({ onCalculate }: Props) {
       <div style={{ marginBottom: "48px" }}>
         <label
           className="block text-xs font-semibold tracking-widest text-[#c084fc] uppercase"
-          style={{ marginBottom: "12px" }}
+          style={{ marginBottom: "13px" }}
         >
           Period Duration
         </label>
@@ -116,7 +116,7 @@ export default function InputCard({ onCalculate }: Props) {
           <button
             onClick={() => setPeriodDur((v) => Math.max(2, v - 1))}
             className="w-9 h-9 rounded-full flex items-center justify-center text-xl text-[#f0e6ff] hover:bg-[#c084fc]/30 transition"
-            style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+            style={{ backgroundColor: "#ffffff1a" }}
           >
             −
           </button>

@@ -68,7 +68,7 @@ export default function InstallPrompt() {
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-[#c084fc] flex-shrink-0">
             <img
-              src="/logo.png"
+              src="/icons/icon-192.png"
               alt="Eve-Circle"
               className="w-full h-full object-cover"
             />

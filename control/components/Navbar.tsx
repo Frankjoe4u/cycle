@@ -10,7 +10,7 @@ export default function Navbar() {
       >
         <img
           src="/icon-192.png"
-          alt="eve-care"
+          alt="Eve-Circle"
           className="w-full h-full object-cover"
         />
       </div>
