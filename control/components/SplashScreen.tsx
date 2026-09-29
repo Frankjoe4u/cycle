@@ -7,8 +7,10 @@ import { useCallback, useEffect, useState, type CSSProperties } from "react";
  *
  * Concept: one 28-day cycle, drawn once. A comet travels the ring and lights
  * each day in its phase colour (period, follicular, fertile, ovulation, luteal).
- * When the circle closes, the moon rises and the flower blooms inside it,
- * then the name and motto settle in.
+ * The mark is on screen from the very first frame, in the same place and size
+ * as the Android launch screen (the maskable icon on #0d0d1a), so the handoff
+ * from the OS is seamless. When the circle closes, the flower blooms and the
+ * name and motto settle in.
  *
  * Plays once per session, tap to skip, and calms down for reduced-motion users.
  */
@@ -152,7 +154,7 @@ export default function SplashScreen() {
           />
 
           {/* moon + flower, centred in the ring */}
-          <g transform="translate(150 150) scale(0.88) translate(-97 -100)">
+          <g transform="translate(150 150) scale(0.96) translate(-97 -100)">
             <g className="ec-moon">
               <path
                 d="M110.52 30.79 A70 70 0 1 0 164.96 126.07 A56 56 0 1 1 110.52 30.79 Z"

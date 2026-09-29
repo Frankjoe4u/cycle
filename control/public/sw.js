@@ -5,7 +5,7 @@
  * - API calls and Next.js RSC requests are never touched
  * Bump VERSION to force every client to refresh its caches.
  */
-const VERSION = "v2";
+const VERSION = "v3";
 const SHELL = "ec-shell-" + VERSION;
 const RUNTIME = "ec-runtime-" + VERSION;
 

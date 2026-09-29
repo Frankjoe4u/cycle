@@ -23,7 +23,7 @@ export default function Home() {
     setHistory(getHistory());
   }, []);
 
-  async function handleCalculate(
+  function handleCalculate(
     res: CycleResult,
     lastPeriod: string,
     cycleLength: number,
@@ -32,25 +32,6 @@ export default function Home() {
     setResult(res);
     saveToHistory(lastPeriod, cycleLength, periodDur, res);
     setHistory(getHistory());
-
-    // save to MongoDB
-    try {
-      await fetch("/api/cycle", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          lastPeriod,
-          cycleLength,
-          periodDur,
-          nextPeriodStart: res.nextPeriodStart.toISOString(),
-          ovulationDay: res.ovulationDay.toISOString(),
-          boyPct: res.boyPct,
-          girlPct: res.girlPct,
-        }),
-      });
-    } catch (err) {
-      console.error("Failed to save to MongoDB:", err);
-    }
 
     // scroll to results
     setTimeout(() => {

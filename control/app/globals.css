@@ -108,7 +108,17 @@ html[data-splash="seen"] .ec-splash { display: none; }
 .ec-flower { transform-box: fill-box; transform-origin: center; }
 .ec-comet, .ec-ripple { transform-origin: 150px 150px; }
 
-.ec-copy { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1.5rem; }
+.ec-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% + min(74vw, 330px) / 2 + 1.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.5rem;
+}
 .ec-word {
   display: flex;
   font-family: var(--font-serif);
@@ -139,12 +149,9 @@ html[data-splash="seen"] .ec-splash { display: none; }
   .ec-ping { animation: ec-ping 1s ease-out var(--d) both; }
   .ec-ripple { animation: ec-ripple 1.5s cubic-bezier(0.2, 0.6, 0.3, 1) 1.6s both; }
 
-  .ec-moon { animation: ec-moon 0.95s cubic-bezier(0.2, 0.9, 0.25, 1) 1.3s both; }
-  .ec-stem { animation: ec-draw 0.6s ease-out 1.75s both; }
-  .ec-leaf { animation: ec-pop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) var(--d) both; }
-  .ec-flower { animation: ec-spin 0.9s cubic-bezier(0.2, 0.9, 0.25, 1) 1.85s both; }
-  .ec-petal { animation: ec-pop 0.6s cubic-bezier(0.2, 1.5, 0.4, 1) var(--d) both; }
-  .ec-core { animation: ec-pop 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) var(--d) both; }
+  .ec-flower { animation: ec-bloom 1s cubic-bezier(0.3, 0.7, 0.3, 1) 1.65s both; }
+  .ec-petal { animation: ec-petal 0.7s ease-out var(--d) both; }
+  .ec-core { animation: ec-petal 0.7s ease-out var(--d) both; }
 
   .ec-letter { animation: ec-letter 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d) both; }
   .ec-motto { animation: ec-motto 1s cubic-bezier(0.2, 0.8, 0.2, 1) 2.75s both; }
@@ -177,21 +184,6 @@ html[data-splash="seen"] .ec-splash { display: none; }
   5% { opacity: 0.6; transform: scale(0.34); }
   100% { opacity: 0; transform: scale(1.5); }
 }
-@keyframes ec-moon {
-  from { opacity: 0; transform: rotate(-35deg) scale(0.75); }
-  to { opacity: 1; transform: rotate(0) scale(1); }
-}
-@keyframes ec-draw {
-  0% { stroke-dashoffset: 1; opacity: 0; }
-  3% { stroke-dashoffset: 0.97; opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 1; }
-}
-@keyframes ec-pop {
-  from { opacity: 0; transform: scale(0); }
-  60% { opacity: 1; transform: scale(1.22); }
-  to { opacity: 1; transform: scale(1); }
-}
-@keyframes ec-spin { from { transform: rotate(-30deg); } to { transform: rotate(0); } }
 @keyframes ec-letter {
   from { opacity: 0; transform: translateY(0.6em); filter: blur(6px); }
   to { opacity: 1; transform: none; filter: blur(0); }
@@ -199,4 +191,14 @@ html[data-splash="seen"] .ec-splash { display: none; }
 @keyframes ec-motto {
   from { opacity: 0; letter-spacing: 0.42em; }
   to { opacity: 1; letter-spacing: 0.16em; }
+}
+@keyframes ec-bloom {
+  0% { transform: rotate(0) scale(1); }
+  45% { transform: rotate(-14deg) scale(1.14); }
+  100% { transform: rotate(0) scale(1); }
+}
+@keyframes ec-petal {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.16); }
+  100% { transform: scale(1); }
 }
